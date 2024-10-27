@@ -36,9 +36,28 @@ p {
 
 }
 
-.body {
+#body {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+}
+
+.coloresf1{
     background-color: #CCFFC5;
+}
+
+.coloresf2{
+    background-color: #ffff00;
+}
+
+.coloresf3{
+    background-color: #ff8c00;
+}
+
+.coloresf4{
+    background-color: #ff0000;
+}
+
+.coloresf5{
+    background-color: #5f5f5f;
 }

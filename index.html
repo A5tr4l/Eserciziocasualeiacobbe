@@ -12,7 +12,7 @@
 
 </head>
 
-<body class="body">
+<body id="body" class="coloresf1">
     <div class="body">
         <div class="container text-center">
             <div class="row align-items-start">
@@ -92,40 +92,63 @@
         crossorigin="anonymous"></script>
 
 
-        <script>
-            function generateRandomInteger(min, max) {
-                return Math.floor(Math.random() * (max - min + 1)) + min;
+    <script>
+        function generateRandomInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        let body = document.querySelector("#body");
+        let randomNumber = generateRandomInteger(1, 100);
+        let tentativi = 5;
+        let button = document.querySelector("#b");
+        let number = document.querySelector("#n");
+        let message = document.querySelector("#message");
+
+        button.addEventListener('click', function () {
+            if (tentativi === 0) {
+                message.textContent = "Hai esaurito i tentativi. Il numero corretto era: " + randomNumber;
+                return;
             }
-    
-            let randomNumber = generateRandomInteger(1, 100);
-            let tentativi = 5;
-            let button = document.querySelector("#b");
-            let number = document.querySelector("#n");
-            let message = document.querySelector("#message");
-    
-            button.addEventListener('click', function () {
-                if (tentativi === 0) {
-                    message.textContent = "Hai esaurito i tentativi. Il numero corretto era: " + randomNumber;
-                    return;
-                }
-    
-                const indovina = parseInt(number.value);
-                tentativi=tentativi-1;
-    
-                if (isNaN(indovina) || indovina < 1 || indovina > 100) {
-                    message.textContent = "Per favore, inserisci un numero tra 1 e 100.";
-                    tentativi=tentativi+1;
-                    return;
-                }
-    
-                if (indovina === randomNumber) {
-                    message.textContent = "Hai indovinato il numero corretto!";
-                    tentativi = 0;
-                } else if (indovina < randomNumber) {
-                    message.textContent = "Hai inserito un numero minore. Hai ancora " + tentativi + " tentativi.";
+
+            const indovina = parseInt(number.value);
+            tentativi = tentativi - 1;
+
+            if (isNaN(indovina) || indovina < 1 || indovina > 100) {
+                message.textContent = "Per favore, inserisci un numero tra 1 e 100.";
+                tentativi = tentativi + 1;
+                return;
+            }
+
+            if (indovina === randomNumber) {
+                message.textContent = "Hai indovinato il numero corretto!";
+                tentativi = 0;
+            } else if (indovina < randomNumber) {
+                message.textContent = "Hai inserito un numero minore. Hai ancora " + tentativi + " tentativi.";
+            } else {
+                message.textContent = "Hai inserito un numero maggiore. Hai ancora " + tentativi + " tentativi.";
+            }
+
+            if (tentativi === 3) {
+                body.classList.remove("coloresf1");
+                body.classList.add("coloresf2");
+            } else {
+                if (tentativi === 2) {
+                    body.classList.remove("coloresf2");
+                    body.classList.add("coloresf3");
                 } else {
-                    message.textContent = "Hai inserito un numero maggiore. Hai ancora " + tentativi + " tentativi.";
+                    if (tentativi === 1) {
+                        body.classList.remove("coloresf3");
+                        body.classList.add("coloresf4");
+                    } else {
+                        if (tentativi === 0) {
+                            body.classList.remove("coloresf4");
+                            body.classList.add("coloresf5");
+                        }
+                    }
                 }
-            });
-        </script>
+            }
+        });
+    </script>
 </body>
+
+</html>
